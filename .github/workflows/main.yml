@@ -23,11 +23,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Test model
-      run: python mainTest.py
-
     - name: Train model
       run: python mainTrain.py
+
+    - name: Test model
+      run: python mainTest.py
 
     - name: Create model release
       uses: actions/create-release@v1
