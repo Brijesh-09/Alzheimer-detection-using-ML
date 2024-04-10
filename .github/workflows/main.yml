@@ -24,10 +24,10 @@ jobs:
         pip install -r requirements.txt
 
     - name: Test model
-      run: python masterTest.py
+      run: python mainTest.py
 
     - name: Train model
-      run: python masterTrain.py
+      run: python mainTrain.py
 
     - name: Create model release
       uses: actions/create-release@v1
