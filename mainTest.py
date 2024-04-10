@@ -5,7 +5,7 @@ import numpy as np
 
 model=load_model('Alzheimer10EpochsCategorical.h5')
 
-image=cv2.imread('C:\\Users\\brijesh\\OneDrive\\Desktop\\Basics\\datasets\\demented\\verymild_619.jpg')
+image=cv2.imread('datasets/demented/verymild_619.jpg')
 
 
 img=Image.fromarray(image)
