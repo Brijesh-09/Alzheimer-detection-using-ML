@@ -55,7 +55,11 @@ jobs:
         body: |
           Release of the application.
 
-    - name: Build Docker image
+    - name: Build and Push Docker image
       run: |
-         docker build -t brijeshkori/alzheimer-detection:latest .
-         docker push brijeshkori/alzheimer-detection:latest
+        echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+        docker build -t brijeshkori/alzheimer-detection:latest .
+        docker push brijeshkori/alzheimer-detection:latest
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
