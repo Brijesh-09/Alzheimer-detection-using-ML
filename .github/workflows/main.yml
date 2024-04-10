@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -24,10 +24,10 @@ jobs:
         pip install -r requirements.txt
 
     - name: Test model
-      run: python mainTest.py
+      run: python masterTest.py
 
     - name: Train model
-      run: python mainTrain.py
+      run: python masterTrain.py
 
     - name: Create model release
       uses: actions/create-release@v1
