@@ -33,7 +33,7 @@ jobs:
       uses: actions/create-release@v1
       id: create_model_release
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         tag_name: model-${{ github.ref }}
         release_name: Model Release ${{ github.ref }}
@@ -46,7 +46,7 @@ jobs:
       uses: actions/create-release@v1
       id: create_app_release
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         tag_name: app-${{ github.ref }}
         release_name: Application Release ${{ github.ref }}
