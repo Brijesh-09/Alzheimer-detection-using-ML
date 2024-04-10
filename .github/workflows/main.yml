@@ -57,5 +57,5 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t your_dockerhub_username/alzheimer-detection:${{ github.ref }} .
-        docker push your_dockerhub_username/alzheimer-detection:${{ github.ref }}
+        docker build -t brijeshkori/alzheimer-detection:${{ github.ref }} .
+        docker push brijeshkori/alzheimer-detection:${{ github.ref }}
