@@ -1,0 +1,61 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Test model
+      run: python mainTest.py
+
+    - name: Train model
+      run: python mainTrain.py
+
+    - name: Create model release
+      uses: actions/create-release@v1
+      id: create_model_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: model-${{ github.ref }}
+        release_name: Model Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          Release of the model.
+
+    - name: Create application release
+      uses: actions/create-release@v1
+      id: create_app_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: app-${{ github.ref }}
+        release_name: Application Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          Release of the application.
+
+    - name: Build Docker image
+      run: |
+        docker build -t your_dockerhub_username/alzheimer-detection:${{ github.ref }} .
+        docker push your_dockerhub_username/alzheimer-detection:${{ github.ref }}
