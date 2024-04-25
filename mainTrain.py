@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 from sklearn.model_selection import train_test_split
-from keras.utils import normalize, to_categorical
+from keras.utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 
