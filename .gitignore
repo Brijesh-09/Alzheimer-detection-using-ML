@@ -1,3 +1,7 @@
-datasets
-pred
+datasets/
+pred/
+uploads/
+Alzheimer10Epochs.h5
+Alzheimer10EpochsCategorical.h5
 backupcode
+datasets.zip/
