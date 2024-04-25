@@ -1,10 +1,23 @@
 import cv2
 import os
+# import numpy as np
+# from sklearn.model_selection import train_test_split
+# from keras.utils import to_categorical
+# from keras.models import Sequential
+# from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+#prev modules
+import tensorflow as tf
+from tensorflow import keras
+from PIL import Image
 import numpy as np
 from sklearn.model_selection import train_test_split
-from keras.utils import to_categorical
+from keras.utils import normalize
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Activation, Dropout, Flatten, Dense
+from keras.utils import to_categorical
+
+#------------------------
 
 # Load and preprocess data
 image_directory = 'datasets/'
