@@ -29,13 +29,37 @@ jobs:
     - name: Test model
       run: python mainTest.py
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+    - name: Create model release
+      uses: actions/create-release@v1
+      id: create_model_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      with:
+        tag_name: model-${{ github.ref }}
+        release_name: Model Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          Release of the model.
+
+    - name: Create application release
+      uses: actions/create-release@v1
+      id: create_app_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      with:
+        tag_name: app-${{ github.ref }}
+        release_name: Application Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+        body: |
+          Release of the application.
 
     - name: Build and Push Docker image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/alzheimer-detection:latest .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/alzheimer-detection:latest
+        echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
+        docker build -t brijeshkori/alzheimer-detection:latest .
+        docker push brijeshkori/alzheimer-detection:latest
       env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
